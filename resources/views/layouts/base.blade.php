@@ -14,7 +14,14 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-12">
+            <h1 class="title m-b-md">Actores</h1>
+            <hr>
+            <a class="btn btn-outline-secondary" href="{{ route('addActor') }}">Agregar Actor</a>
+            <a class="btn btn-outline-secondary" href="{{ route('actorsList') }}">Listado Actores</a>
+        </div>
         @yield('content', 'Aquí va el contenido')
+
     </div>
 </div>
 

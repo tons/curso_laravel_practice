@@ -4,8 +4,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1 class="title m-b-md">Actores</h1>
-        <hr>
+
         <form action="{{ route('searchActors') }}" method="post">
             @csrf
             <div class="form-group">
@@ -18,7 +17,10 @@
     <div class="col-md-12 mt-4">
         <div class="list-group">
         @foreach($list as $item)
-            <a class="list-group-item list-group-item-action" href="{{ route('detalleActor', $item->id) }}">{{ $item->getNombreCompleto() }}</a>
+            <div class="list-group-item list-group-item-action">
+            <a href="{{ route('detalleActor', $item->id) }}">{{ $item->getNombreCompleto() }}</a>
+            <a class="btn btn-outline-primary float-right" href="{{ route('actorEdit', $item->id) }}">Editar</a>
+            </div>
         @endforeach
         </div>
     </div>

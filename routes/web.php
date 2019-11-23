@@ -67,6 +67,16 @@ Route::get('/pelicula/{id}', function($id) {
 });
 
 
-Route::get('/actores', 'ActorController@directory')->name('actores');
-Route::get('/actor/{id}', 'ActorController@show')->name('detalleActor');
-Route::post('/actores/buscar', 'ActorController@search')->name('searchActors');
+Route::get('/actors', 'ActorController@directory')->name('actorsList'); // Buscador
+Route::get('/actor/{id}', 'ActorController@show')->name('detalleActor'); // Ficha Actor
+Route::post('/actors/search', 'ActorController@search')->name('searchActors'); // Resultado buscador
+
+/** ADD Actor */
+Route::get('/actors/add', 'ActorController@create')->name('addActor');
+Route::post('/actors/add', 'ActorController@store')->name('saveActor');
+
+/** EDIT Actor */
+Route::get('/actors/edit/{id}', 'ActorController@edit')->name('actorEdit');
+Route::put('/actors/edit/{id}', 'ActorController@edit')->name('actorEdit');
+
+
