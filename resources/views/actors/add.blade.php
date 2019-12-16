@@ -15,22 +15,22 @@
             @csrf
             <div class="form-group">
                 <label for="">Nombre:</label>
-                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="..." value="{{ $actor->first_name }}">
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="..." value="">
             </div>
             <div class="form-group">
                 <label for="">Apellido:</label>
-                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="..." value="{{ $actor->last_name }}">
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="..." value="">
             </div>
             <div class="form-group">
                 <label for="">Rating:</label>
-                <input type="text" class="form-control" name="rating" id="rating" placeholder="..." value="{{ $actor->rating }}">
+                <input type="text" class="form-control" name="rating" id="rating" placeholder="..." value="">
             </div>
             <div class="form-group">
                 <label for="">Película favorita:</label>
                 <select class="form-control" name="favorite_movie_id" id="">
                     <option value="" disabled>Seleccione opción..</option>
                     @foreach($pelis as $item)
-                        <option value="{{ $item->id }}" {{ ( $item->id == $actor->favorite_movie_id) ? 'selected="selected"' : '' }}> {{ $item->title }}</option>
+                        <option value="{{ $item->id }}"> {{ $item->title }}</option>
                     @endforeach
                 </select>
             </div>

@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/movielist', 'Movies@mostrarJson')->name('MovieList');
+
+/*Route::get('/movielist', function (){
+    $movies = \App\Movies::orderBy('title')->get();
+    return $movies;
+})->name('MovieList');*/

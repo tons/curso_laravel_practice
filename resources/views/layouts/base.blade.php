@@ -15,10 +15,13 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="title m-b-md">Actores</h1>
+            <h1 class="title m-b-md">{{ $pagetitle }}</h1>
             <hr>
             <a class="btn btn-outline-secondary" href="{{ route('addActor') }}">Agregar Actor</a>
             <a class="btn btn-outline-secondary" href="{{ route('actorsList') }}">Listado Actores</a>
+            ||
+            <a class="btn btn-outline-secondary" href="{{ route('movieAdd') }}">Agregar Pelicula</a>
+            <a class="btn btn-outline-secondary" href="{{ route('MovieList') }}">Listado JSON peli</a>
         </div>
         @yield('content', 'Aquí va el contenido')
 

@@ -79,4 +79,14 @@ Route::post('/actors/add', 'ActorController@store')->name('saveActor');
 Route::get('/actors/edit/{id}', 'ActorController@edit')->name('actorEdit');
 Route::put('/actors/edit/{id}', 'ActorController@edit')->name('actorEdit');
 
+/* MOVIES */
+Route::get('/movies', 'ActorController@directory')->name('actorsList'); // Listado
+
+/*Route::get('/addpelicula', function (){
+    return view('saveMovieWithFetch');
+});*/
+
+Route::get('/addpelicula', 'MovieController@showJson')->name('movieAdd');
+Route::post('/addpelicula', 'MovieController@store')->name('movieSave');
+
 

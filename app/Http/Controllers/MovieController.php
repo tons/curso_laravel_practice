@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Dotenv\Validator;
-use Illuminate\Http\Request;
-use App\Actors;
+use App\Genres;
 use App\Movies;
+use Illuminate\Http\Request;
 
-class ActorController extends Controller
+class MovieController extends Controller
 {
     /*public function directory() {
         return view('actores');
     }*/
 
     public function directory() {
-        $list = Actors::orderby('first_name')->get();
-        return view('actores', compact('list'));
+
+        $list = Movies::orderby('title')->get();
+        return view('peliculas', compact('list'));
     }
 
     public function show($id) {
-        $actor = Actors::find($id);
+        $actor = Movies::find($id);
 
         $data = array();
-        $data['pagetitle'] = "Listado Actores";
         $data['info'] = $actor->getAttributes();
         $data['nombre'] = $actor->getNombreCompleto();
 
@@ -31,41 +30,53 @@ class ActorController extends Controller
 
     public function search(Request $busca) {
         $query = $busca['busca'];
-        $actors['pagetitle'] = "Buscar Actor";
         $actors['list'] = Actors::where('first_name', 'LIKE', "{$query}%")->get();
         return view('buscador', $actors);
     }
 
     public function create() {
         $data = [];
-        $data['pagetitle'] = "Agregar Actor";
         $data['pelis'] = Movies::all();
+        $data['pagetitle'] = "Agregar Película";
         return view('actors.add', $data);
     }
 
     public function edit($id) {
         $data = [];
-        $data['pagetitle'] = "Editar Actor";
-        $data['pelis'] = Movies::all();
-        $data['actor'] = Actors::find($id);
-        return view('actors.edit', $data);
+        $data['genres'] = Genres::all();
+        $data['movie'] = Movies::find($id);
+        return view('saveMovieWithFetch', $data);
     }
 
     public function store(Request $fields) {
 
-        $reglas = [
+        /*$reglas = [
             'first_name' => 'required|string|min:5'
         ];
+        $fields->validate($reglas);*/
 
-        $fields->validate($reglas);
+        //$movie = Movies::create($fields->all()); //Shortcut
 
-        //$actor = Actors::create($fields->all()); //Shortcut
+        $movie = new Movies();
+        $movie->fill($fields->all());
+        $movie->save();
 
-        $actor = new Actors();
-        $actor->fill($fields->all());
-        $actor->save();
+        return redirect('movies');
+    }
 
-        return redirect('actors');
+    public function guardarPelicula(Request $fields) {
+        $data = $fields->all();
+        $pelicula = new Movies();
+        $pelicula->save();
+
+        //return response()->json(['status' => "ok"], 500);
+
+
+        $movie = new Movies();
+        $movie->fill($fields->all());
+        $movie->save();
+
+        return redirect('movies');
     }
 
     public function update($id, Request $request) {
@@ -77,5 +88,11 @@ class ActorController extends Controller
         $actor->save();
 
         return view('actors');
+    }
+
+    public function showJson() {
+        $data = [];
+        $data['pagetitle'] = "Agregar Película";
+        return view("saveMovieWithFetch", $data);
     }
 }
